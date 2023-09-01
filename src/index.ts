@@ -2,6 +2,7 @@ import { Graph, GraphConfigInterface } from "@cosmograph/cosmos";
 
 import { nodes, links, Node, Link } from "./data";
 import { CosmosLabels } from "./labels";
+import { performances } from "./performances";
 
 import "./styles.css";
 
@@ -9,22 +10,29 @@ const canvas = document.querySelector("canvas") as HTMLCanvasElement;
 const div = document.querySelector("#labels") as HTMLDivElement;
 
 const cosmosLabels = new CosmosLabels<Node, Link>(div);
-const nodesToShowLabelsFor = [
-  "Drury Lane Theatre",
-  "King's Theatre",
-  "Lincoln's Inn Fields",
-  "Goodman's Fields",
-  "Haymarket Theatre",
-  "Covent Garden",
-  "Bartholomew Fair",
-  "Southwark Fair",
-  "Pantheon, Oxford Street",
-];
+// const nodesToShowLabelsFor = [
+//   "Drury Lane Theatre",
+//   "King's Theatre",
+//   "Lincoln's Inn Fields",
+//   "Goodman's Fields",
+//   "Haymarket Theatre",
+//   "Covent Garden",
+//   "Bartholomew Fair",
+//   "Southwark Fair",
+//   "Pantheon, Oxford Street",
+//   "York Buildings",
+// ];
+
+const uniqueTheaterNames = Array.from(
+  new Set(performances.map((performance) => performance.theaterName))
+);
+
+const nodesToShowLabelsFor = uniqueTheaterNames;
 
 let graph: Graph<Node, Link>;
 export const config: GraphConfigInterface<Node, Link> = {
   backgroundColor: "#151515",
-  nodeSize: (n) => (nodesToShowLabelsFor.includes(n.id) ? 8 : 2),
+  nodeSize: 4,
   nodeColor: (n) => n.color,
   nodeGreyoutOpacity: 0.1,
   linkWidth: 0.1,
