@@ -1,4 +1,7 @@
 import { performances } from "./performances";
+import { dataTest } from "./dataTest";
+import { edges } from "./edges";
+import { data } from "./data.json";
 
 export type Node = {
   id: string;
@@ -10,17 +13,21 @@ export type Link = {
   target: string;
 };
 
-export const nodes: Node[] = Array.from(
+export const nodes: any = Array.from(
   new Set([
-    ...performances.map((p) => `P:${p.performanceTitle}`),
-    ...performances.map((p) => p.theaterName),
+    ...data.map((p: any) => `${p.FOLLOWED}`),
+    ...data.map((p: any) => p.FOLLOWER),
   ])
 ).map((id) => ({
   id,
-  color: id.indexOf("P:") === 0 ? "#4B5BBF" : "#ED69B4",
+  color: "#4B5BBF",
 }));
 
-export const links: Link[] = performances.map((p) => ({
-  source: p.theaterName,
-  target: `P:${p.performanceTitle}`,
+console.log(nodes);
+
+export const links: any = data.map((p: any) => ({
+  source: p.FOLLOWER,
+  target: `${p.FOLLOWED}`,
 }));
+
+console.log(links);

@@ -3,6 +3,7 @@ import { Graph, GraphConfigInterface } from "@cosmograph/cosmos";
 import { nodes, links, Node, Link } from "./data";
 import { CosmosLabels } from "./labels";
 import { performances } from "./performances";
+import { dataTest } from "./dataTest";
 
 import "./styles.css";
 
@@ -24,10 +25,10 @@ const cosmosLabels = new CosmosLabels<Node, Link>(div);
 // ];
 
 const uniqueTheaterNames = Array.from(
-  new Set(performances.map((performance) => performance.theaterName))
+  new Set(nodes.map((performance: any) => performance.id))
 );
 
-const nodesToShowLabelsFor = uniqueTheaterNames;
+const nodesToShowLabelsFor: any = uniqueTheaterNames;
 
 let graph: Graph<Node, Link>;
 export const config: GraphConfigInterface<Node, Link> = {
@@ -35,10 +36,11 @@ export const config: GraphConfigInterface<Node, Link> = {
   nodeSize: 4,
   nodeColor: (n) => n.color,
   nodeGreyoutOpacity: 0.1,
-  linkWidth: 0.1,
+  linkWidth: 1,
   linkColor: "#5F74C2",
   linkArrows: false,
   linkGreyoutOpacity: 0,
+  renderLinks: true,
   simulation: {
     gravity: 0.1,
     linkDistance: 1,

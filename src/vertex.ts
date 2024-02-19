@@ -1,4 +1,4 @@
-const nodesObject = [
+export const vertex = [
   {
     vertexes: [
       {
